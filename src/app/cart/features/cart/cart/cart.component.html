@@ -1,0 +1,23 @@
+<h1 class="text-center">Votre panier</h1>
+@if(cartItems.length > 0) {
+<div>
+  @for (item of cartItems; track $index) {
+  <div class="cart-item">
+    <div class="item-details">
+      <span class="text-lg font-medium text-900 mt-2">{{ item.product.name }}</span>
+      <span>Quantity:</span>
+      <input type="number" [(ngModel)]="item.quantity" min="1" (change)="updateQuantity(item.product.id, item.quantity)" />
+      <span>Price: {{ item.product.price | currency }}</span>
+      <button (click)="removeFromCart(item.product.id)" class="remove-button">Remove</button>
+    </div>
+  </div>
+  }
+  <div class="cart-total">
+    <strong>Total:</strong> {{ getTotal() | currency }}
+  </div>
+</div>
+} @else {
+<div class="empty-cart">
+  <p>Votre panier est vide.</p>
+</div>
+}

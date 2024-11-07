@@ -1,0 +1,38 @@
+<h1 class="text-center">Liste des produits</h1>
+
+<p-button label="Créer produit" (onClick)="onCreate()" class="block text-center" />
+
+<p-dataView #dv [value]="products()" [paginator]="true" [rows]="10" [totalRecords]="products().length">
+    <ng-template pTemplate="list" let-products>
+        @for (product of products; track product ) {
+        <p-card class="block mb-2">
+            <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
+            <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
+            <p>{{ product.description }}</p>
+            <p>Price: {{ product.price | currency }}</p>
+            <p>Status: {{ product.inventoryStatus }}</p>
+            <p>Rating: {{ product.rating ?? 0 }}/{{maxRating}}</p>
+            <p>Quantity in Cart: {{ productQuantityInCart[product.id] }} </p>
+            @if(product.inventoryStatus != 'OUTOFSTOCK') {
+                <div>
+                    <label for="quantity-{{ product.id }}">Quantity to add in cart:</label>
+                    <input type="number" id="quantity-{{ product.id }}" [(ngModel)]="productQuantity[product.id]" min="1" />
+                </div>
+            }
+            
+            <ng-template pTemplate="footer">
+                <div class="flex gap-3 mt-1">
+                    <p-button [disabled]="product.inventoryStatus === 'OUTOFSTOCK'" label="Ajouter au panier"
+                        icon="pi pi-shopping-cart" (onClick)="addToCart(product, productQuantity[product.id])" class="p-button-success"></p-button>
+                    <p-button label="Modifier" severity="secondary" (onClick)="onUpdate(product)"></p-button>
+                    <p-button label="Supprimer" severity="danger" (onClick)="onDelete(product)"></p-button>
+                </div>
+            </ng-template>
+        </p-card>
+        }
+    </ng-template>
+</p-dataView>
+
+<p-dialog [(visible)]="isDialogVisible" [style]="{ width: '50vw' }" header="Ajout/Edition produit">
+    <app-product-form [product]="editedProduct()" (save)="onSave($event)" (cancel)="onCancel()" />
+</p-dialog>

@@ -1,0 +1,77 @@
+:host {
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+
+/* General cart styling */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Cart item container */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: #f9f9f9;
+}
+
+/* Item details styling */
+.item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling for the item name, quantity, and price */
+.item-details span {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Button styling */
+.remove-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.remove-button:hover {
+  background-color: rgb(200, 9, 9);
+}
+
+/* Cart total styling */
+.cart-total {
+  margin: 20px 10px;
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Cart empty styling*/
+.empty-cart {
+  text-align: center;
+  margin: 20px 10px;
+  font-size: 1.5rem;
+  color: #888;
+}
+
+.empty-cart p {
+  margin: 0;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
